@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "fireact": "^0.1.5",
-<<<<<<< HEAD
     "firebase": "^7.2.3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -14,15 +13,6 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.1"
-=======
-    "firebase": "^7.4.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-redux": "^7.1.3",
-    "react-scripts": "3.2.0",
-    "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0"
->>>>>>> master
   },
   "scripts": {
     "start": "react-scripts start",
