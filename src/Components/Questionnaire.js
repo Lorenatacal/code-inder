@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './Questionnaire.css';
 import { Switch, Route } from 'react-router-dom'
 
 function Questionnaire() { 
@@ -43,144 +44,149 @@ function Questionnaire() {
     return (
 
         <>
-             <form>
-                <h4>Personal Info</h4>
-                <label>
-                    Firstname
-                    <input value={questionnaireInputs.firstname}></input>
+             <form className="questionnaire">
+                <h4 className="title">Personal Info</h4>
+                <label className="formName">
+                    Firstname: 
+                    <input className="formInput" ></input>
                 </label>
-                <label>
-                    Surname
-                    <input value={questionnaireInputs.surname}></input>
+                <label className="formName">
+                    Surname: 
+                    <input className="formInput" ></input>
                 </label>
-                <label>
-                    Date of Birth
-                    <input type="date" value={questionnaireInputs.dateOfBirth}></input>
-                </label>
-                
-                <label>
-                    Address Line 1
-                    <input value={questionnaireInputs.Address.AddressLine1}></input>
-                </label>
-                
-                <label>
-                    Address Line 2
-                    <input value={questionnaireInputs.Address.AddressLine2}></input>
-                </label>
-                
-                <label>
-                    Post Code
-                    <input value={questionnaireInputs.postcode}></input>
-                </label>
-                
                 <br />
-                <h4>Personality</h4>
-                <label>
-                    Do you love helping others?
-                    <br />
-                    <p>yes</p>
+                <label className="formName">
+                    Date of Birth: 
+                    <input type="date" className="formInput"></input>
+                </label>
+                <br />
+                <label className="formName">
+                    Address Line 1: 
+                    <input className="formInput"></input>
+                </label >
+                <label className="formName">
+                    Address Line 2: 
+                    <input className="formInput"></input>
+                </label>
+                <br />
+                <label className="formName">
+                    Post Code: 
+                    <input className="formInput" onChange={handleChangeIn('helpful', true)}></input>
+                </label>
+                <br />
+                <div className="grid">
+                <h4 className="title">Personality</h4>
+                <label className="questions">
+                    Do you love helping others? 
+                    <p className="questions"> yes </p>
                     <input type="radio" name="helpAnswer" onChange={handleChangeIn('helpful', true)} />
-                    <p>no</p>
+                    <p className="questions"> no </p>
                     <input type="radio" name="helpAnswer" onChange={handleChangeIn('helpful', false)} />
                 </label>
-                
-                <label>
-                    Do you prefer variety to routine?
                     <br />
-                    <p>yes</p>
+                <label className="questions">
+                    Do you prefer variety to routine?
+                    <p className="questions">yes</p>
                     <input type="radio" name="helpAnswer" onChange={handleChangeIn('varietyPreferred', true)} />
-                    <p>no</p>
+                    <p className="questions">no</p>
                     <input type="radio" name="helpAnswer" onChange={handleChangeIn('varietyPreferred', false)} />
                 </label>
-                
-                <label>
+                <br />
+                <label className="questions">
                     Are you hardworking?
-                    <br />
-                    <p>yes</p>
+                    <p className="questions">yes</p>
                     <input type="radio" name="hardworkingAnswer" onChange={handleChangeIn('hardWorking', true)} />
-                    <p>no</p>
+                    <p className="questions">no</p>
                     <input type="radio" name="hardworkingAnswer" onChange={handleChangeIn('hardWorking', false)} />
                 </label>
+                <br />
                 
-                
-                <label>
+                <label className="questions">
                     Would you see yourself as a leader?
-                    <br />
-                    <p>yes</p>
+                    <p className="questions">yes</p>
                     <input type="radio" name="leaderAnswer" onChange={handleChangeIn('leader', true)} />
-                    <p>no</p>
+                    <p className="questions">no</p>
                     <input type="radio" name="leaderAnswer" onChange={handleChangeIn('leader', false)} />
                 </label>
-                
-                <label>
+                <br />
+                <label className="questions">
                     Do you want to work with someone who is similar to you or someone who will complement your strengths?
-                    <br />
-                    <p>yes</p>
+                    <p className="questions">yes</p>
                     <input type="radio" name="similarAnswer" onChange={handleChangeIn('similarPair', true)} />
-                    <p>no</p>
+                    <p className="questions">no</p>
                     <input type="radio" name="similarAnswer" onChange={handleChangeIn('similarPair', true)} />
                 </label>
-
-                <p>A fun fact about you (will be displayed on your profile)</p>
-                <textarea placeholder="e.g: I love cats" name="funFactInput"></textarea>
-
-                <h4>Coding Preferences</h4>
+                <br /> 
+                <p className="questions" >A fun fact about you (will be displayed on your profile)</p>
                 <br />
-                 <label>
-                    Languages/frameworks preferred
-                    <br />
-                    <p>JavaScript ~ React, Redux</p>
-                    <input type="radio" name="language" onChange={handleChangeIn('language', 'javascript')} />
-                    <p>Python ~ Django, Flask (web developement)</p>
-                    <input type="radio" name="language" onChange={handleChangeIn('language', 'pythonweb')} />
-                    <p>Java</p>
-                    <input type="radio" name="language" onChange={handleChangeIn('language', 'java')} />
-                    <p>Ruby and Ruby on Rails</p>
-                    <input type="radio" name="language" onChange={handleChangeIn('language', 'ruby')} />
-                    <p>The C Language </p>
-                    <input type="radio" name="language" onChange={handleChangeIn('language', 'clanguage')} />
-                    <p>Python ~ TensorFlow (machine learning) </p>
-                    <input type="radio" name="language" onChange={handleChangeIn('language', 'pythonml')} />
-                </label>
+                <textarea className="textarea" placeholder="e.g: I love cats" name="funFactInput"></textarea>
+                </div>
                 <br />
-                <label>
-                    Years of coding experience
-                    <br />
-                    <p>0 - 1 </p>
-                    <input type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '0to1')} />
-                    <p>2 - 3 </p>
-                    <input type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '2to3')} />
-                    <p>4 - 5</p>
-                    <input type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '4to5')} />
-                    <p>6 or over</p>
-                    <input type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '6')} />
-                </label>
-                
-                <label>
-                    Do you want to work with someone who has less experience than you?
-                    <br />
-                    <p>yes</p>
-                    <input type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', true)} />
-                    <p>no</p>
-                    <input type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', false)} />
-                </label>
-                
-                <h4>Logistics</h4>
-                <br />
-                <label>
-                    How far are you willing to travel (miles)?
-                    <p> 0 - 5 </p>
-                    <input type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '0to5')} />
-                    <p> 5 - 10 </p>
-                    <input type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '5to10')} />
-                    <p> 10 - 15 </p>
-                    <input type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '10to15')} />
-                    <p> 15 - 20 </p>
-                    <input type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '15to20')} />
 
+                <div className="gridRight">
+                <h4 className="title">Coding Preferences</h4>
+                <br />
+
+                 <label className="questions">
+                    <p className="preferenceQuestions">Languages/frameworks preferred</p>
+                    <br />
+                    <p className="preference">JavaScript ~ React, Redux</p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('language', 'javascript')} />
+                    <p className="preference">Python ~ Django, Flask (web developement)</p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('language', 'pythonweb')} />
+                    <p className="preference">Java</p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('language', 'java')} />
+                    <p className="preference">Ruby and Ruby on Rails</p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('language', 'ruby')} />
+                    <p className="preference">The C Language </p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('language', 'clanguage')} />
+                    <p className="preference">Python ~ TensorFlow (machine learning) </p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('language', 'pythonml')} />
                 </label>
-                
-                <input type="submit" value="Finish" />
+                <br />
+
+                <label className="questions">
+                    <p className="preferenceQuestions">Years of coding experience</p>
+                    <br />
+                    <p className="preference">0 - 1 </p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '0to1')} />
+                    <p className="preference">2 - 3 </p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '2to3')} />
+                    <p className="preference">4 - 5</p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '4to5')} />
+                    <p className="preference">6 or over</p>
+                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '6')} />
+                </label>
+                <br />
+
+                <label className="questions">
+                    <p className="preferenceQuestions">Do you want to work with someone who has less experience than you?</p>
+                    <br />
+                    <p className="questions">yes</p>
+                    <input className="questions" type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', true)} />
+                    <p className="questions">no</p>
+                    <input className="questions" type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', false)} />
+                </label>
+                </div>
+
+                <div className="gridLogistic">
+                    <h4 className="title">Logistics</h4>
+                    <label>
+                        <p className="preferenceQuestions">How far are you willing to travel (miles)?</p>
+                        <br />
+                        <p className="preference"> 0 - 5 </p>
+                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '0to5')} />
+                        <p className="preference"> 5 - 10 </p>
+                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '5to10')} />
+                        <p className="preference"> 10 - 15 </p>
+                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '10to15')} />
+                        <p className="preference"> 15 - 20 </p>
+                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '15to20')} />
+                    </label>
+                <br />
+                </div>
+                <br />
+                <input className="button" type="submit" value="Finish" />
              </form>
          </>
     )
