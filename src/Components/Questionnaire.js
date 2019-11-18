@@ -23,6 +23,8 @@ function Questionnaire() {
 
     })
 
+    const [funFactInput, setFunFactInputs] = React.useState(''); //temp: change to redux state
+
     const handleChangeIn = (propertyName, newValue) => {
         const callbackHandler = (e) => {
             const newState = {
@@ -118,14 +120,12 @@ function Questionnaire() {
                     <p>no</p>
                     <input type="radio" name="similarAnswer" onChange={handleChangeIn('similarPair', true)} />
                 </label>
-                
-                {/* <label>
-                    A fun fact about you (will be displayed on your profile)
-                    <input value="funFact"></input>
-                    <h4>Coding Preferences</h4>
-                    <br />
-                </label> */}
-                
+
+                <p>A fun fact about you (will be displayed on your profile)</p>
+                <textarea placeholder="e.g: I love cats" name="funFactInput"></textarea>
+
+                <h4>Coding Preferences</h4>
+                <br />
                  <label>
                     Languages/frameworks preferred
                     <br />
