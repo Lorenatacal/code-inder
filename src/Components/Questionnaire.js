@@ -96,10 +96,12 @@ function Questionnaire() {
                         e.preventDefault()
                         axios
                         .get(
-                            `https://maps.googleapis.com/maps/api/geocode/json?address=${questionnaireInputs.postcode}&key=YOUR_API_KEY`
+                            `https://maps.googleapis.com/maps/api/geocode/json?address=${questionnaireInputs.postcode}&key=AIzaSyCbyYIxp_EPw2MHXdz6QinG7NhSurjDKAk`
                         )
                         .then(response => {
                             console.log(response)
+                            // postcode.latitude(response.data.results[0].geometry.location.lat)
+                            // postcode.longitude(response.data.results[0].geometry.location.lng)
                         });
                     }}
                     >set</button>
