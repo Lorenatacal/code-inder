@@ -96,7 +96,7 @@ function Questionnaire() {
                         e.preventDefault()
                         axios
                         .get(
-                            `https://maps.googleapis.com/maps/api/geocode/json?address=${questionnaireInputs.postcode}&key=AIzaSyCbyYIxp_EPw2MHXdz6QinG7NhSurjDKAk`
+                            `https://maps.googleapis.com/maps/api/geocode/json?address=${questionnaireInputs.postcode}&key=API_KEY`
                         )
                         .then(response => {
                             console.log(response)
