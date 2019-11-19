@@ -2,7 +2,14 @@ import React from 'react';
 import './Questionnaire.css';
 import { Switch, Route } from 'react-router-dom'
 
+import { useFirebaseDatabaseWriters, useFirebaseCurrentUser } from 'fireact'
+
 function Questionnaire() { 
+    const user = useFirebaseCurrentUser()
+    const uid = user ? user.uid : null
+
+    const { update } = useFirebaseDatabaseWriters(`users/${uid}`)
+
     const [questionnaireInputs, setQuestionnaireInputs] = React.useState({
         firstname: '',
         surname: '',
@@ -70,6 +77,7 @@ function Questionnaire() {
         console.log(questionnaireInputs.firstname);
         console.log(compareCodingPreferences(questionnaireInputs, dummyAccount))
         console.log(comparePersonality(questionnaireInputs, dummyAccount), 'pertsonality')
+        update({'Profile' : questionnaireInputs})
         event.preventDefault();
     }
 
