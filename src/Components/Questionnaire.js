@@ -1,5 +1,6 @@
 import React from 'react';
 import './Questionnaire.css';
+import axios from 'axios';
 import { Switch, Route } from 'react-router-dom'
 
 function Questionnaire() { 
@@ -90,6 +91,18 @@ function Questionnaire() {
                     <input className="formInput" onChange={(event) => {
                         handleTypedInput(event, 'postcode')
                     }}></input>
+                    <button
+                    onClick={(e) => {
+                        e.preventDefault()
+                        axios
+                        .get(
+                            `https://maps.googleapis.com/maps/api/geocode/json?address=${questionnaireInputs.postcode}&key=AIzaSyCbyYIxp_EPw2MHXdz6QinG7NhSurjDKAk`
+                        )
+                        .then(response => {
+                            console.log(response)
+                        });
+                    }}
+                    >set</button>
                 </label>
                 <br />
                 <div className="grid">

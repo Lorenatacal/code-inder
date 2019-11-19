@@ -1,0 +1,20 @@
+.mainContainer { 
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 40% 20% 40%;
+    grid-template-rows: 20% 60% 20%;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(15,69,152,1) 29%, rgba(25,204,152,1) 100%);
+}
+
+.questionnairePersonal {
+    -moz-box-shadow: inset 3px 3px 10px rgb(114, 114, 116);
+    -webkit-box-shadow: inset 3px 3px 10px rgb(114, 114, 116);
+    box-shadow: inset 3px 3px 10px rgb(114, 114, 116);
+    border-radius: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+ }
+ 
