@@ -48,7 +48,7 @@ function Login() {
                             >
                                 Login
                         </Button>
-                        <FormLabel className={Styles.tLabel}>Need an account? Sign up here!</FormLabel>
+                        <FormLabel className={Styles.tLabel2}>Need an account? Sign up here!</FormLabel>
                     </FormGroup>
                 </div>
             </div>

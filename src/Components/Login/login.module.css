@@ -38,7 +38,7 @@
 
 .tLabel { 
     font-size: .9em !important;
-    margin-top: 6%;
+    margin-top: 1%;
     font-family: 'Alata', sans-serif !important;
 }
 
@@ -66,4 +66,16 @@
 .logo {
     max-width: 100%;
     max-height: 100%;
+}
+
+.tLabel2 { 
+    font-size: .9em !important;
+    margin-top: 25%;
+    margin-left: 18%;
+    font-family: 'Alata', sans-serif !important;
+}
+
+
+.tLabel2:hover { 
+    color: #1186c8 !important;
 }
