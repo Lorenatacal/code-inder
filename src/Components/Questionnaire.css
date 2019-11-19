@@ -1,0 +1,96 @@
+.questionnaire {
+    -moz-box-shadow: inset 3px 3px 10px rgb(114, 114, 116);
+    -webkit-box-shadow: inset 3px 3px 10px rgb(114, 114, 116);
+    box-shadow: inset 3px 3px 10px rgb(114, 114, 116);
+    border-radius: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+ }
+
+ .button {
+    -moz-box-shadow: inset -3px -3px 10px #cc870a;
+    -webkit-box-shadow: inset -3px -3px 10px #cc870a;
+    box-shadow: inset -3px -3px 10px #cc870a;
+    background-color: #f7b31c; /* Fill color */
+    color: white; /* Text color */
+    border-radius: 15px; /* Rounded button edges */
+    font-style: italic; /* Italicize text */
+    padding: 10px 30px; /* Distance between text and border */
+    font-size: 20px;
+ }
+ .formName {
+    font-size: 20px;
+    display: inline;
+    font-display: center;
+    margin: 1%
+ }
+ 
+ .formInput {
+    -moz-box-shadow: inset -1px -1px 6px rgb(114, 114, 116);
+    -webkit-box-shadow: inset -1px -1px 6px rgb(114, 114, 116);
+    box-shadow: inset -1px -1px 6px rgb(114, 114, 116);
+    background-color: white; /* Fill color */
+    color: black; /* Text color */
+    border-radius: 15px; /* Rounded button edges */
+    font-style: italic; /* Italicize text */
+    padding: 10px 30px; /* Distance between text and border */
+    font-size: 20px;
+    display: inline-block;
+    margin: 0.1%
+ }
+ .title{
+     font-size: 30px;
+ }
+ .questions{
+     display: inline;
+     margin: 3%;
+     font-size: 20px;
+ }
+ .textarea {
+    font-size: 20px;
+    margin-top: 1%
+ }
+ .preference{
+    display: inline-block;
+    margin: 2%;
+    font-size: 18px;
+}
+.preferenceQuestions {
+    display: inline;
+    margin: 3%;
+    font-size: 20px;
+    font-weight: bold;
+}
+.grid { 
+    margin: 30px;
+    width: 40%;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 20px 4px rgba(0,0,0,0.25), -3px -3px 20px 4px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    float: left
+}
+.gridRight{
+    margin: 30px;
+    width: 40%;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 20px 4px rgba(0,0,0,0.25), -3px -3px 20px 4px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    margin-top: 1%;
+    float: right
+}
+.gridLogistic {
+    display: inline-block;
+    margin: 20px;
+    width: 40%;
+    height: 200px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 20px 4px rgba(0,0,0,0.25), -3px -3px 20px 4px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    margin-left: 20%
+}
