@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 function Questionnaire() { 
     const [questionnaireInputs, setQuestionnaireInputs] = React.useState({
         firstname: '',
-        surname:'',
+        surname: '',
         dateOfBirth: '',
         Address: {
             AddressLine1: '',
@@ -23,6 +23,26 @@ function Questionnaire() {
         travelDistance: ''
 
     })
+
+    const dummyAccount = {
+        firstname: 'Syeda',
+        surname: 'Sultana',
+        dateOfBirth: '',
+        Address: {
+            AddressLine1: '',
+            AddressLine2: ''
+        },
+        postcode: 'IG11 8PZ',
+        helpful: true,
+        varietyPreferred: false,
+        hardWorking: true,
+        leader: false,
+        similarPair: true,
+        language: 'javascript',
+        yearsOfExperience: '2to3',
+        lessExperiencePair: false,
+        travelDistance: '5to10'
+    }
 
     const [funFactInput, setFunFactInputs] = React.useState(''); //temp: change to redux state
 
@@ -45,12 +65,34 @@ function Questionnaire() {
         }
         setQuestionnaireInputs(newState)
     }
+
+    const handleSubmit = (event) => {
+        console.log(questionnaireInputs.firstname);
+        console.log(compareCodingPreferences(questionnaireInputs.language, dummyAccount.language))
+        event.preventDefault();
+    }
+
+    const compareLogistics = (userLogistics, otherPersonLogistics) => {
+
+    }
+
+    const compareCodingPreferences = (userLang, otherPersonLang) => {
+        if (userLang === otherPersonLang) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const comparePersonality = () => {
+        
+    }
      
 
     return (
 
         <>
-             <form className="questionnaire">
+             <form className="questionnaire" onSubmit={handleSubmit}>
                 <h4 className="title">Personal Info</h4>
                 <label className="formName">
                     Firstname: 
@@ -105,9 +147,9 @@ function Questionnaire() {
                 <label className="questions">
                     Do you prefer variety to routine?
                     <p className="questions">yes</p>
-                    <input type="radio" name="helpAnswer" onChange={handleChangeIn('varietyPreferred', true)} />
+                    <input type="radio" name="varietyPreferred" onChange={handleChangeIn('varietyPreferred', true)} />
                     <p className="questions">no</p>
-                    <input type="radio" name="helpAnswer" onChange={handleChangeIn('varietyPreferred', false)} />
+                    <input type="radio" name="varietyPreferred" onChange={handleChangeIn('varietyPreferred', false)} />
                 </label>
                 <br />
                 <label className="questions">
@@ -167,13 +209,13 @@ function Questionnaire() {
                     <p className="preferenceQuestions">Years of coding experience</p>
                     <br />
                     <p className="preference">0 - 1 </p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '0to1')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '0to1')} />
                     <p className="preference">2 - 3 </p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '2to3')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '2to3')} />
                     <p className="preference">4 - 5</p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '4to5')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '4to5')} />
                     <p className="preference">6 or over</p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '6')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '6')} />
                 </label>
                 <br />
 
@@ -181,9 +223,9 @@ function Questionnaire() {
                     <p className="preferenceQuestions">Do you want to work with someone who has less experience than you?</p>
                     <br />
                     <p className="questions">yes</p>
-                    <input className="questions" type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', true)} />
+                    <input className="questions" type="radio" name="lessExperiencePair" onChange={handleChangeIn('lessExperiencePair', true)} />
                     <p className="questions">no</p>
-                    <input className="questions" type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', false)} />
+                    <input className="questions" type="radio" name="lessExperiencePair" onChange={handleChangeIn('lessExperiencePair', false)} />
                 </label>
                 </div>
 
@@ -204,9 +246,7 @@ function Questionnaire() {
                 <br />
                 </div>
                 <br />
-                <input className="button" type="submit" value="Finish" onsubmit={() => {
-                    console.log(questionnaireInputs.name)
-                }} />
+                <input className="button" type="submit" value="Finish" />
              </form>
          </>
     )
