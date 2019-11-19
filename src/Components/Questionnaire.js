@@ -2,13 +2,24 @@ import React from 'react';
 import './Questionnaire.css';
 import { Switch, Route } from 'react-router-dom'
 
-import { useFirebaseDatabaseWriters, useFirebaseCurrentUser } from 'fireact'
+import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
 
 function Questionnaire() { 
     const user = useFirebaseCurrentUser()
     const uid = user ? user.uid : null
+    const name = useFirebaseDatabaseValue(`users/${uid}/profile/name`)
 
     const { update } = useFirebaseDatabaseWriters(`users/${uid}`)
+    const currentUser = useFirebaseDatabaseValue(`users/${uid}/Profile`)
+    const allUsersList = useFirebaseDatabaseValue(`users`) || {}
+    const allOtherUsersList = Object.keys(allUsersList).filter(e => e != uid)
+    const sAllOtherUsers = Object.keys(allUsersList)
+                            .filter(key => allOtherUsersList.includes(key))
+                            .reduce((obj, key) => {
+                                obj[key] = allUsersList[key]
+                                return obj
+                            }, {})
+    const sortedUsers = Object.values(sAllOtherUsers).map((e) => e.Profile)
 
     const [questionnaireInputs, setQuestionnaireInputs] = React.useState({
         firstname: '',
