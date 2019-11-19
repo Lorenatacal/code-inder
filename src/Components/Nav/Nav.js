@@ -3,7 +3,7 @@ import Styles from './nav.module.css'
 import { Button } from '@material-ui/core'
 
 function Nav( { currentPage } ) {
-    return (    
+    return ( 
         <div className={Styles.navContainer}>
             <Button 
                 className={currentPage == 'Home' ? Styles.navActive 
