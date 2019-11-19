@@ -1,26 +1,23 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-
+import Styles from './home.module.css'
 import { logoutUser } from '../Redux/Actions/auth'
 import { useDispatch } from 'react-redux'
-import Questionnaire from './Questionnaire';
+import Nav from './Nav/Nav'
 
 function Home() { 
 
     const dispatch = useDispatch()
 
     return (
-        <>
-        <h1>HOME!</h1>
-        <Questionnaire />
-        <button onClick={(e) => {
-            dispatch(logoutUser())
-        }}>logout</button>
-        
-        </>
-        // <Switch>
-        //     <Route path='/' component={Home}/>
-        // </Switch>
+         <div className={Styles.mainContainer}>
+             <div className={Styles.navContainer}>
+                <Nav currentPage='Home'/>
+             </div>
+             <div className={Styles.cardContainer}>
+                
+             </div>
+        </div>
     )
 }
 

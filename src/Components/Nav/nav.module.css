@@ -1,0 +1,10 @@
+.navContainer {
+    position: fixed;
+    max-height: 15vh;
+    transform: translateX(23vw);
+    margin-top: 1%;
+}
+
+.navActive { 
+    background-color: rgba(255,255,255, .5) !important;
+}
