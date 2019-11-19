@@ -14,10 +14,7 @@ function Questionnaire() {
         firstname: '',
         surname: '',
         dateOfBirth: '',
-        Address: {
-            AddressLine1: '',
-            AddressLine2: ''
-        },
+        address: '',
         postcode: '',
         helpful: false,
         varietyPreferred: false,
@@ -36,10 +33,7 @@ function Questionnaire() {
         surname: 'Sultana',
         dateOfBirth: '',
         gender:'',
-        Address: {
-            AddressLine1: '',
-            AddressLine2: ''
-        },
+        Address: '',
         postcode: 'IG11 8PZ',
         helpful: true,
         varietyPreferred: false,
@@ -76,10 +70,13 @@ function Questionnaire() {
 
     const handleSubmit = (event) => {
         console.log(questionnaireInputs.firstname);
+        console.log(questionnaireInputs)
         console.log('firing')
         console.log(compareCodingPreferences(questionnaireInputs, dummyAccount))
         console.log(comparePersonality(questionnaireInputs, dummyAccount), 'pertsonality')
         update({'Profile' : questionnaireInputs})
+        event.preventDefault()
+
     }
 
     const compareLogistics = (userLogistics, otherPersonLogistics) => {
@@ -163,15 +160,9 @@ function Questionnaire() {
                 <label className="formName">
                     Address Line 1: 
                     <input className="formInput" onChange={(event) => {
-                        handleTypedInput(event, 'Address.AddressLine1')
+                        handleTypedInput(event, 'address')
                     }}></input>
                 </label >
-                <label className="formName">
-                    Address Line 2: 
-                    <input className="formInput" onChange={(event) => {
-                        handleTypedInput(event, 'Address.AddressLine2')
-                    }}></input>
-                </label>
                 <br />
                 <label className="formName">
                     Post Code: 
@@ -276,8 +267,9 @@ function Questionnaire() {
                 </div>
                 <br />
                 <input className="button" type="submit" onClick={(e) => { 
-                    e.preventDefault()
-                    handleSubmit(e)}} value="Finish" />
+                    handleSubmit(e)
+                    }} value="Finish" />
+                    
              </form>
          </>
     )
