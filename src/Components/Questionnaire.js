@@ -76,10 +76,10 @@ function Questionnaire() {
 
     const handleSubmit = (event) => {
         console.log(questionnaireInputs.firstname);
+        console.log('firing')
         console.log(compareCodingPreferences(questionnaireInputs, dummyAccount))
         console.log(comparePersonality(questionnaireInputs, dummyAccount), 'pertsonality')
         update({'Profile' : questionnaireInputs})
-        event.preventDefault();
     }
 
     const compareLogistics = (userLogistics, otherPersonLogistics) => {
@@ -275,7 +275,9 @@ function Questionnaire() {
                 </label>
                 </div>
                 <br />
-                <input className="button" type="submit" value="Finish" />
+                <input className="button" type="submit" onClick={(e) => { 
+                    e.preventDefault()
+                    handleSubmit(e)}} value="Finish" />
              </form>
          </>
     )
