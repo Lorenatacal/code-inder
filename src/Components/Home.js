@@ -4,6 +4,7 @@ import Styles from './home.module.css'
 import { logoutUser } from '../Redux/Actions/auth'
 import { useDispatch } from 'react-redux'
 import Nav from './Nav/Nav'
+import Questionnaire from './Questionnaire'
 
 function Home() { 
 
@@ -11,12 +12,14 @@ function Home() {
 
     return (
          <div className={Styles.mainContainer}>
-             <div className={Styles.navContainer}>
+             {/* <div className={Styles.navContainer}>
                 <Nav currentPage='Home'/>
-             </div>
-             <div className={Styles.cardContainer}>
+                </div>
+                <div className={Styles.cardContainer}>
                 
-             </div>
+            </div> */}
+             <Questionnaire />
+            <button onClick={() => dispatch(logoutUser())}>logouts</button>
         </div>
     )
 }

@@ -35,6 +35,7 @@ function Questionnaire() {
         firstname: 'Syeda',
         surname: 'Sultana',
         dateOfBirth: '',
+        gender:'',
         Address: {
             AddressLine1: '',
             AddressLine2: ''
@@ -150,6 +151,14 @@ function Questionnaire() {
                         handleTypedInput(event, 'dateOfBirth')
                     }}></input>
                 </label>
+                <label className="formName">
+                    Gender: 
+                    <p className="questions"> male </p>
+                    <input type="radio" name="gender" onChange={handleChangeIn('gender', "male")} />
+                    <p className="questions"> female </p>
+                    <input type="radio" name="gender" onChange={handleChangeIn('gender', 'female')} />
+                    <br />
+                </label>
                 <br />
                 <label className="formName">
                     Address Line 1: 
@@ -264,23 +273,6 @@ function Questionnaire() {
                     <p className="questions">no</p>
                     <input className="questions" type="radio" name="lessExperiencePair" onChange={handleChangeIn('lessExperiencePair', false)} />
                 </label>
-                </div>
-
-                <div className="gridLogistic">
-                    <h4 className="title">Logistics</h4>
-                    <label>
-                        <p className="preferenceQuestions">How far are you willing to travel (miles)?</p>
-                        <br />
-                        <p className="preference"> 0 - 5 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '0to5')} />
-                        <p className="preference"> 5 - 10 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '5to10')} />
-                        <p className="preference"> 10 - 15 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '10to15')} />
-                        <p className="preference"> 15 - 20 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '15to20')} />
-                    </label>
-                <br />
                 </div>
                 <br />
                 <input className="button" type="submit" value="Finish" />
