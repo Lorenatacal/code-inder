@@ -27,7 +27,7 @@ function Questionnaire() {
     const [funFactInput, setFunFactInputs] = React.useState(''); //temp: change to redux state
 
     const handleChangeIn = (propertyName, newValue) => {
-        const callbackHandler = (e) => {
+        const callbackHandler = () => {
             const newState = {
                 ...questionnaireInputs,
                 [propertyName]: newValue
@@ -38,7 +38,13 @@ function Questionnaire() {
         return callbackHandler
     }
 
-    handleChangeIn('helpful', true)
+    const handleTypedInput = (e, propertyName) => {
+        const newState = {
+            ...questionnaireInputs,
+            [propertyName]: e.target.value
+        }
+        setQuestionnaireInputs(newState)
+    }
      
 
     return (
@@ -48,30 +54,42 @@ function Questionnaire() {
                 <h4 className="title">Personal Info</h4>
                 <label className="formName">
                     Firstname: 
-                    <input className="formInput" ></input>
+                    <input className="formInput" onChange={(event) => {
+                        handleTypedInput(event, 'firstname')
+                    }}></input>
                 </label>
                 <label className="formName">
                     Surname: 
-                    <input className="formInput" ></input>
+                    <input className="formInput" onChange={(event) => {
+                        handleTypedInput(event, 'surname')
+                    }}></input>
                 </label>
                 <br />
                 <label className="formName">
                     Date of Birth: 
-                    <input type="date" className="formInput"></input>
+                    <input type="date" className="formInput" onChange={(event) => {
+                        handleTypedInput(event, 'dateOfBirth')
+                    }}></input>
                 </label>
                 <br />
                 <label className="formName">
                     Address Line 1: 
-                    <input className="formInput"></input>
+                    <input className="formInput" onChange={(event) => {
+                        handleTypedInput(event, 'Address.AddressLine1')
+                    }}></input>
                 </label >
                 <label className="formName">
                     Address Line 2: 
-                    <input className="formInput"></input>
+                    <input className="formInput" onChange={(event) => {
+                        handleTypedInput(event, 'Address.AddressLine2')
+                    }}></input>
                 </label>
                 <br />
                 <label className="formName">
                     Post Code: 
-                    <input className="formInput" onChange={handleChangeIn('helpful', true)}></input>
+                    <input className="formInput" onChange={(event) => {
+                        handleTypedInput(event, 'postcode')
+                    }}></input>
                 </label>
                 <br />
                 <div className="grid">
@@ -186,7 +204,9 @@ function Questionnaire() {
                 <br />
                 </div>
                 <br />
-                <input className="button" type="submit" value="Finish" />
+                <input className="button" type="submit" value="Finish" onsubmit={() => {
+                    console.log(questionnaireInputs.name)
+                }} />
              </form>
          </>
     )
