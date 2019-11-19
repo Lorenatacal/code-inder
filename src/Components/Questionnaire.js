@@ -37,7 +37,7 @@ function Questionnaire() {
         varietyPreferred: false,
         hardWorking: true,
         leader: false,
-        similarPair: true,
+        similarPair: false,
         language: 'javascript',
         yearsOfExperience: '2to3',
         lessExperiencePair: false,
@@ -68,7 +68,8 @@ function Questionnaire() {
 
     const handleSubmit = (event) => {
         console.log(questionnaireInputs.firstname);
-        console.log(compareCodingPreferences(questionnaireInputs.language, dummyAccount.language))
+        console.log(compareCodingPreferences(questionnaireInputs, dummyAccount))
+        console.log(comparePersonality(questionnaireInputs, dummyAccount), 'pertsonality')
         event.preventDefault();
     }
 
@@ -76,16 +77,44 @@ function Questionnaire() {
 
     }
 
-    const compareCodingPreferences = (userLang, otherPersonLang) => {
-        if (userLang === otherPersonLang) {
+    const compareCodingPreferences = (user, otherPerson) => {
+        if (user.language === otherPerson.language && user.yearsOfExperience === otherPerson.yearsOfExperience) {
+            return true
+        } else if (user.language === otherPerson.language && user.lessExperiencePair) {
             return true
         } else {
             return false
         }
     }
 
-    const comparePersonality = () => {
-        
+    const comparePersonality = (user, otherPerson) => {
+        if (user.similarPair) {
+            if(user.helpful === otherPerson.helpful && 
+               user.varietyPreferred === otherPerson.varietyPreferred && 
+               user.hardWorking === otherPerson.hardWorking && 
+               user.leader !== otherPerson.leader) {
+                   return true
+            } else {
+            if (user.helpful !== otherPerson.helpful && 
+                user.varietyPreferred !== otherPerson.varietyPreferred && 
+                user.hardWorking !== otherPerson.hardWorking && 
+                user.leader !== otherPerson.leader) {
+                    return true
+            } else if (user.helpful !== otherPerson.helpful ||
+                user.varietyPreferred !== otherPerson.varietyPreferred ||
+                user.hardWorking !== otherPerson.hardWorking && 
+                user.leader !== otherPerson.leader) {
+                    return true
+            } else if (user.helpful !== otherPerson.helpful &&
+                user.varietyPreferred !== otherPerson.varietyPreferred ||
+                user.hardWorking !== otherPerson.hardWorking && 
+                user.leader !== otherPerson.leader) {
+                    return true
+            } else {
+                return false
+            }
+        }
+        } 
     }
      
 
