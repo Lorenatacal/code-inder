@@ -38,8 +38,8 @@ function Questionnaire() {
         language: '',
         yearsOfExperience: '',
         lessExperiencePair: false,
-        travelDistance: ''
-
+        travelDistance: '',
+        funFact: ''
     })
 
     const dummyAccount = {
@@ -203,7 +203,15 @@ function Questionnaire() {
                 <br/>
                 <p className={Styles.question2}>A fun fact about you (will be displayed on your profile)</p>
                 <br/>
-                <textarea rows="2" cols="127" placeholder="e.g: I can lick my elbow" name="funFactInput"></textarea>
+                <textarea 
+                    rows="2" 
+                    cols="127" 
+                    placeholder="e.g: I can lick my elbow" 
+                    name="funFactInput" 
+                    onChange={(event) => {
+                        handleTypedInput(event, 'funFact')
+                    }}
+                ></textarea>
                 </div>
         
                 <div className={Styles.codingContainer}>  
@@ -269,11 +277,5 @@ function Questionnaire() {
          </>
     )
 }
-
-
-
-
-
-
 
 export default Questionnaire;
