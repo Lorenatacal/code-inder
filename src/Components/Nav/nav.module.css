@@ -1,7 +1,9 @@
+
 .navContainer {
-    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     max-height: 15vh;
-    transform: translateX(23vw);
     margin-top: 1%;
 }
 

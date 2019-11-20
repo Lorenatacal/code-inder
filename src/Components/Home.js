@@ -4,22 +4,26 @@ import Styles from './home.module.css'
 import { logoutUser } from '../Redux/Actions/auth'
 import { useDispatch } from 'react-redux'
 import Nav from './Nav/Nav'
+import Card from './Card/Card'
+import Profile from './Profile/Profile'
 import Questionnaire from './Questionnaire'
 
 function Home() { 
 
     const dispatch = useDispatch()
-
     return (
-         <div className={Styles.mainContainer}>
-             {/* <div className={Styles.navContainer}>
-                <Nav currentPage='Home'/>
+        <>
+            <Switch>
+                <Route path='/profile' component={Profile}/>
+            </Switch>
+            <div className={Styles.mainContainer}>
+                <div className={Styles.navContainer}>
+                    <Nav currentPage='Home'/>
                 </div>
                 <div className={Styles.cardContainer}>
-                
-            </div> */}
-             <Questionnaire />
-            <button onClick={() => dispatch(logoutUser())}>logouts</button>
+                    <Card></Card>
+                </div>
+            </div>
         </div>
     )
 }
