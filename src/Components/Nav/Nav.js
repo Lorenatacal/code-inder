@@ -24,6 +24,9 @@ function Nav( { currentPage } ) {
             <Link to='/profile' style={{textDecoration: 'none'}}>
                 <Button className={Styles.navItem} color='primary' size='large' variant='text'>Profile</Button>
             </Link>
+            <Link to='/sorting' style={{textDecoration: 'none'}}>
+                <Button className={Styles.navItem} color='primary' size='large' variant='text'>Sorting</Button>
+            </Link>
             <Button className={Styles.navItem} onClick={() => dispatch(logoutUser())}  color='primary' size='large' variant='text'>Logout</Button>
         </div>
     )

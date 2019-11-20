@@ -4,13 +4,14 @@ import Styles from './Form.module.css';
 import { Input } from '@material-ui/core'
 import Nav from './Nav/Nav'
 
+
 import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
 
 function Questionnaire() { 
     const user = useFirebaseCurrentUser()
     const uid = user ? user.uid : null
     const name = useFirebaseDatabaseValue(`users/${uid}/profile/name`)
-
+    const { update : updateSUsers} = useFirebaseDatabaseWriters(`users/${uid}`)
     const { update } = useFirebaseDatabaseWriters(`users/${uid}`)
     const currentUser = useFirebaseDatabaseValue(`users/${uid}/Profile`)
     const allUsersList = useFirebaseDatabaseValue(`users`) || {}
@@ -82,59 +83,15 @@ function Questionnaire() {
     }
 
     const handleSubmit = (event) => {
-        console.log(questionnaireInputs.firstname);
-        console.log(questionnaireInputs)
-        console.log('firing')
-        console.log(compareCodingPreferences(questionnaireInputs, dummyAccount))
-        console.log(comparePersonality(questionnaireInputs, dummyAccount), 'pertsonality')
+        console.log (uid, 'currentUser')
+        console.log (sAllOtherUsers, 'allOtherUsers')
+        // comparePerson(currentUser, sAllOtherUsers);
         update({'Profile' : questionnaireInputs})
+        updateSUsers({'SortedUsers' : sortedUsers})
         event.preventDefault()
-
     }
 
-    const compareLogistics = (userLogistics, otherPersonLogistics) => {
-
-    }
-
-    const compareCodingPreferences = (user, otherPerson) => {
-        if (user.language === otherPerson.language && user.yearsOfExperience === otherPerson.yearsOfExperience) {
-            return true
-        } else if (user.language === otherPerson.language && user.lessExperiencePair) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    const comparePersonality = (user, otherPerson) => {
-        if (user.similarPair) {
-            if(user.helpful === otherPerson.helpful && 
-               user.varietyPreferred === otherPerson.varietyPreferred && 
-               user.hardWorking === otherPerson.hardWorking && 
-               user.leader !== otherPerson.leader) {
-                   return true
-            } else {
-            if (user.helpful !== otherPerson.helpful && 
-                user.varietyPreferred !== otherPerson.varietyPreferred && 
-                user.hardWorking !== otherPerson.hardWorking && 
-                user.leader !== otherPerson.leader) {
-                    return true
-            } else if (user.helpful !== otherPerson.helpful ||
-                user.varietyPreferred !== otherPerson.varietyPreferred ||
-                user.hardWorking !== otherPerson.hardWorking && 
-                user.leader !== otherPerson.leader) {
-                    return true
-            } else if (user.helpful !== otherPerson.helpful &&
-                user.varietyPreferred !== otherPerson.varietyPreferred ||
-                user.hardWorking !== otherPerson.hardWorking && 
-                user.leader !== otherPerson.leader) {
-                    return true
-            } else {
-                return false
-            }
-        }
-        } 
-    }
+    
      
     console.log(uid)
     
