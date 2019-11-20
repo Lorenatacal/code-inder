@@ -18,12 +18,29 @@
     grid-row-end: 4;
     grid-column-start: 2;
     grid-column-end: 3;
-    opacity: 0.4;
-    width: 100%;
-    height: 100%;
+    opacity: 0.9;
+    padding: 10%;
     background-color: white;
     border: 1px solid rgba(108,106,108, 0.3);
     border-radius: 3%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center
+}
+
+.title {
+    font-size: 3vh;
+    color: rgb(0, 112, 94);
+    align-self: center;
+}
+
+.header {
+    font-size: 2vh;
+    color: rgb(6, 20, 155);
+    align-self: center;
+}
+
+.text {
+    font-size: 1.5vh;
+    color: rgb(143, 143, 142);
+    align-self: center;
 }
