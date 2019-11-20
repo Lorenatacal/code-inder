@@ -79,3 +79,14 @@
 .tLabel2:hover { 
     color: #1186c8 !important;
 }
+
+.profileCard {
+    width: 100% !important;
+    height: 100% !important ;
+    background-color: white;
+    border-radius: 30px;
+    display: grid;
+    grid-template-rows: 5% 45% 10% 15% 25%;
+    grid-template-columns: 20% 60% 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
