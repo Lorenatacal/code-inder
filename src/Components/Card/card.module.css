@@ -6,6 +6,38 @@
     display: grid;
     grid-template-rows: 5% 45% 10% 15% 25%;
     grid-template-columns: 20% 60% 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cardContainer:hover { 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
+}
+
+.experience { 
+    font-family: 'Alata', sans-serif;
+    font-size: 1.5em;
+    display: flex;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    justify-content: center;
+    align-items: center;
+}
+
+.languageContainer {
+    grid-row-start: 5;
+    grid-row-end: 6;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.language { 
+    max-width: 8vw;
+    max-height: 8vh;
 }
 
 .avatarContainer {
@@ -21,4 +53,28 @@
 .avatar { 
     max-width: 75%;
     max-height: 100%;
+}
+
+.skip {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.skip:hover { 
+    background-color: transparent !important;
+}
+
+.match { 
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 5;
+    grid-row-end: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

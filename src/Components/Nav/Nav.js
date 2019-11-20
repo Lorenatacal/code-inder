@@ -19,10 +19,17 @@ function Nav( { currentPage } ) {
                     size='large' 
                     variant='text'>
                         Home
-                    </Button>
+                </Button>
             </Link>
             <Link to='/profile' style={{textDecoration: 'none'}}>
-                <Button className={Styles.navItem} color='primary' size='large' variant='text'>Profile</Button>
+                <Button 
+                    className={currentPage == 'Profile' ? Styles.navActive 
+                                                        : Styles.navItem}
+                    color='primary' 
+                    size='large' 
+                    variant='text'>
+                        Profile
+                </Button>
             </Link>
             <Button className={Styles.navItem} onClick={() => dispatch(logoutUser())}  color='primary' size='large' variant='text'>Logout</Button>
         </div>
