@@ -2,15 +2,30 @@ import React from 'react';
 import './Questionnaire.css';
 import { Switch, Route } from 'react-router-dom'
 
+import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
+
 function Questionnaire() { 
+    const user = useFirebaseCurrentUser()
+    const uid = user ? user.uid : null
+    const name = useFirebaseDatabaseValue(`users/${uid}/profile/name`)
+
+    const { update } = useFirebaseDatabaseWriters(`users/${uid}`)
+    const currentUser = useFirebaseDatabaseValue(`users/${uid}/Profile`)
+    const allUsersList = useFirebaseDatabaseValue(`users`) || {}
+    const allOtherUsersList = Object.keys(allUsersList).filter(e => e != uid)
+    const sAllOtherUsers = Object.keys(allUsersList)
+                            .filter(key => allOtherUsersList.includes(key))
+                            .reduce((obj, key) => {
+                                obj[key] = allUsersList[key]
+                                return obj
+                            }, {})
+    const sortedUsers = Object.values(sAllOtherUsers).map((e) => e.Profile)
+
     const [questionnaireInputs, setQuestionnaireInputs] = React.useState({
         firstname: '',
-        surname:'',
+        surname: '',
         dateOfBirth: '',
-        Address: {
-            AddressLine1: '',
-            AddressLine2: ''
-        },
+        address: '',
         postcode: '',
         helpful: false,
         varietyPreferred: false,
@@ -23,6 +38,24 @@ function Questionnaire() {
         travelDistance: ''
 
     })
+
+    const dummyAccount = {
+        firstname: 'Syeda',
+        surname: 'Sultana',
+        dateOfBirth: '',
+        gender:'',
+        Address: '',
+        postcode: 'IG11 8PZ',
+        helpful: true,
+        varietyPreferred: false,
+        hardWorking: true,
+        leader: false,
+        similarPair: false,
+        language: 'javascript',
+        yearsOfExperience: '2to3',
+        lessExperiencePair: false,
+        travelDistance: '5to10'
+    }
 
     const [funFactInput, setFunFactInputs] = React.useState(''); //temp: change to redux state
 
@@ -45,12 +78,67 @@ function Questionnaire() {
         }
         setQuestionnaireInputs(newState)
     }
+
+    const handleSubmit = (event) => {
+        console.log(questionnaireInputs.firstname);
+        console.log(questionnaireInputs)
+        console.log('firing')
+        console.log(compareCodingPreferences(questionnaireInputs, dummyAccount))
+        console.log(comparePersonality(questionnaireInputs, dummyAccount), 'pertsonality')
+        update({'Profile' : questionnaireInputs})
+        event.preventDefault()
+
+    }
+
+    const compareLogistics = (userLogistics, otherPersonLogistics) => {
+
+    }
+
+    const compareCodingPreferences = (user, otherPerson) => {
+        if (user.language === otherPerson.language && user.yearsOfExperience === otherPerson.yearsOfExperience) {
+            return true
+        } else if (user.language === otherPerson.language && user.lessExperiencePair) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    const comparePersonality = (user, otherPerson) => {
+        if (user.similarPair) {
+            if(user.helpful === otherPerson.helpful && 
+               user.varietyPreferred === otherPerson.varietyPreferred && 
+               user.hardWorking === otherPerson.hardWorking && 
+               user.leader !== otherPerson.leader) {
+                   return true
+            } else {
+            if (user.helpful !== otherPerson.helpful && 
+                user.varietyPreferred !== otherPerson.varietyPreferred && 
+                user.hardWorking !== otherPerson.hardWorking && 
+                user.leader !== otherPerson.leader) {
+                    return true
+            } else if (user.helpful !== otherPerson.helpful ||
+                user.varietyPreferred !== otherPerson.varietyPreferred ||
+                user.hardWorking !== otherPerson.hardWorking && 
+                user.leader !== otherPerson.leader) {
+                    return true
+            } else if (user.helpful !== otherPerson.helpful &&
+                user.varietyPreferred !== otherPerson.varietyPreferred ||
+                user.hardWorking !== otherPerson.hardWorking && 
+                user.leader !== otherPerson.leader) {
+                    return true
+            } else {
+                return false
+            }
+        }
+        } 
+    }
      
 
     return (
 
         <>
-             <form className="questionnaire">
+             <form className="questionnaire" onSubmit={handleSubmit}>
                 <h4 className="title">Personal Info</h4>
                 <label className="formName">
                     Firstname: 
@@ -71,19 +159,21 @@ function Questionnaire() {
                         handleTypedInput(event, 'dateOfBirth')
                     }}></input>
                 </label>
+                <label className="formName">
+                    Gender: 
+                    <p className="questions"> male </p>
+                    <input type="radio" name="gender" onChange={handleChangeIn('gender', "male")} />
+                    <p className="questions"> female </p>
+                    <input type="radio" name="gender" onChange={handleChangeIn('gender', 'female')} />
+                    <br />
+                </label>
                 <br />
                 <label className="formName">
                     Address Line 1: 
                     <input className="formInput" onChange={(event) => {
-                        handleTypedInput(event, 'Address.AddressLine1')
+                        handleTypedInput(event, 'address')
                     }}></input>
                 </label >
-                <label className="formName">
-                    Address Line 2: 
-                    <input className="formInput" onChange={(event) => {
-                        handleTypedInput(event, 'Address.AddressLine2')
-                    }}></input>
-                </label>
                 <br />
                 <label className="formName">
                     Post Code: 
@@ -105,9 +195,9 @@ function Questionnaire() {
                 <label className="questions">
                     Do you prefer variety to routine?
                     <p className="questions">yes</p>
-                    <input type="radio" name="helpAnswer" onChange={handleChangeIn('varietyPreferred', true)} />
+                    <input type="radio" name="varietyPreferred" onChange={handleChangeIn('varietyPreferred', true)} />
                     <p className="questions">no</p>
-                    <input type="radio" name="helpAnswer" onChange={handleChangeIn('varietyPreferred', false)} />
+                    <input type="radio" name="varietyPreferred" onChange={handleChangeIn('varietyPreferred', false)} />
                 </label>
                 <br />
                 <label className="questions">
@@ -167,13 +257,13 @@ function Questionnaire() {
                     <p className="preferenceQuestions">Years of coding experience</p>
                     <br />
                     <p className="preference">0 - 1 </p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '0to1')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '0to1')} />
                     <p className="preference">2 - 3 </p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '2to3')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '2to3')} />
                     <p className="preference">4 - 5</p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '4to5')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '4to5')} />
                     <p className="preference">6 or over</p>
-                    <input className="preference" type="radio" name="language" onChange={handleChangeIn('yearsOfExperience', '6')} />
+                    <input className="preference" type="radio" name="yearsOfExperience" onChange={handleChangeIn('yearsOfExperience', '6')} />
                 </label>
                 <br />
 
@@ -181,32 +271,16 @@ function Questionnaire() {
                     <p className="preferenceQuestions">Do you want to work with someone who has less experience than you?</p>
                     <br />
                     <p className="questions">yes</p>
-                    <input className="questions" type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', true)} />
+                    <input className="questions" type="radio" name="lessExperiencePair" onChange={handleChangeIn('lessExperiencePair', true)} />
                     <p className="questions">no</p>
-                    <input className="questions" type="radio" name="similarAnswer" onChange={handleChangeIn('lessExperiencePair', false)} />
+                    <input className="questions" type="radio" name="lessExperiencePair" onChange={handleChangeIn('lessExperiencePair', false)} />
                 </label>
                 </div>
-
-                <div className="gridLogistic">
-                    <h4 className="title">Logistics</h4>
-                    <label>
-                        <p className="preferenceQuestions">How far are you willing to travel (miles)?</p>
-                        <br />
-                        <p className="preference"> 0 - 5 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '0to5')} />
-                        <p className="preference"> 5 - 10 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '5to10')} />
-                        <p className="preference"> 10 - 15 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '10to15')} />
-                        <p className="preference"> 15 - 20 </p>
-                        <input className="preference" type="radio" name="travelDistance"onChange={handleChangeIn('travelDistance', '15to20')} />
-                    </label>
                 <br />
-                </div>
-                <br />
-                <input className="button" type="submit" value="Finish" onsubmit={() => {
-                    console.log(questionnaireInputs.name)
-                }} />
+                <input className="button" type="submit" onClick={(e) => { 
+                    handleSubmit(e)
+                    }} value="Finish" />
+                    
              </form>
          </>
     )
