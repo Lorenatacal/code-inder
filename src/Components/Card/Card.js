@@ -10,7 +10,7 @@ function Card() {
             <div className={Styles.avatarContainer}>
                 <img className={Styles.avatar} src={avatar}></img>
             </div>
-        </div>
+            </div>
     )
 }
 

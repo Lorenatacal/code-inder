@@ -3,6 +3,7 @@ import Styles from './nav.module.css'
 import { Button } from '@material-ui/core'
 import { logoutUser } from '../../Redux/Actions/auth'
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom' 
 
 function Nav( { currentPage } ) {
     const dispatch = useDispatch()
@@ -16,7 +17,9 @@ function Nav( { currentPage } ) {
                 variant='text'>
                     Home
                 </Button>
-            <Button className={Styles.navItem}  color='primary' size='large' variant='text'>Profile</Button>
+            <Link to='/profile' style={{textDecoration: 'none'}}>
+                <Button className={Styles.navItem} color='primary' size='large' variant='text'>Profile</Button>
+            </Link>
             <Button className={Styles.navItem} onClick={() => dispatch(logoutUser())}  color='primary' size='large' variant='text'>Logout</Button>
         </div>
     )
