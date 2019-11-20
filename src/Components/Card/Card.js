@@ -8,6 +8,7 @@ import python from '../../Assets/Languages/python-original.svg'
 import ruby from '../../Assets/Languages/ruby-original.svg'
 import { Button } from '@material-ui/core'
 import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
+import axios from 'axios';
 
 
 function Card({ yearsOfExperience = '', language}) {
@@ -18,6 +19,7 @@ function Card({ yearsOfExperience = '', language}) {
     let currentCardCounter = useFirebaseDatabaseValue(`users/${uid}/CurrentCard`)
     let imageSrc = ''
     const [flipped, setFlipped] = React.useState(false)
+    const [data, setData] = React.useState()
     
     switch (language) {
         case 'javascript':
@@ -48,13 +50,23 @@ function Card({ yearsOfExperience = '', language}) {
                   <img className={Styles.language} src={imageSrc}/>
                 </div>
                   <Button className={Styles.skip} onClick={() => update({['CurrentCard'] : ++currentCardCounter})}>Skip</Button>
-                  <Button className={Styles.match} onClick={() => setFlipped(true)}>Get in touch!</Button>
+                  {/* <Button className={Styles.match} onClick={() => setFlipped(true)}>Get in touch!</Button> */}
+                  <Button className={Styles.match} onClick={() => {
+                       setFlipped(true)
+                       axios
+                           .get(`https://maps.googleapis.com/maps/api/staticmap?center=51.586529,-0.057410&size=400x400&key=API_KEY`)
+                           .then(response => {
+                               console.log(response, 'response')
+                               setData(response.data);
+                           })
+                   }}>Get in touch!</Button>
+                  
                 </div>
                 <button className={Styles.cardContainer}  onClick={() => {
                     setFlipped(false)
                 }}>
                     <div className={Styles.avatarContainer}>
-                        <p>Back Card</p>
+                        <img src='https://maps.googleapis.com/maps/api/staticmap?center=n179pt&zoom=14&size=400x400&key=API_KEY' alt="Smiley face" height="400" width="400"></img>
                     </div>
                 </button>
             </ReactCardFlip>
