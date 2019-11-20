@@ -54,7 +54,7 @@ function Card({ yearsOfExperience = '', language}) {
                   <Button className={Styles.match} onClick={() => {
                        setFlipped(true)
                        axios
-                           .get(`https://maps.googleapis.com/maps/api/staticmap?center=n179pt&zoom=14&size=400x400&key=AIzaSyCbyYIxp_EPw2MHXdz6QinG7NhSurjDKAk`,)
+                           .get(`https://maps.googleapis.com/maps/api/staticmap?center=51.586529,-0.057410&size=400x400&key=API_KEY`)
                            .then(response => {
                                console.log(response, 'response')
                                setData(response.data);
@@ -66,7 +66,7 @@ function Card({ yearsOfExperience = '', language}) {
                     setFlipped(false)
                 }}>
                     <div className={Styles.avatarContainer}>
-                        <img src='https://maps.googleapis.com/maps/api/staticmap?center=n179pt&zoom=14&size=400x400&key=AIzaSyCbyYIxp_EPw2MHXdz6QinG7NhSurjDKAk' alt="Smiley face" height="400" width="400"></img>
+                        <img src='https://maps.googleapis.com/maps/api/staticmap?center=n179pt&zoom=14&size=400x400&key=API_KEY' alt="Smiley face" height="400" width="400"></img>
                     </div>
                 </button>
             </ReactCardFlip>
