@@ -42,7 +42,6 @@ const comparePersonality = (user, otherPerson) => {
     } 
 }
 
-function Sorting() {
     const user = useFirebaseCurrentUser()
     const uid = user ? user.uid : null
     const allOtherUsers = useFirebaseDatabaseValue(`users/${uid}/SortedUsers`)
@@ -55,21 +54,9 @@ function Sorting() {
     const dispatch = useDispatch()
     let count = 0
 
-    const handleComparison = (user, otherPerson) => {
-        if (compareCodingPreferences(user, otherPerson) && comparePersonality(user, otherPerson)) {
-                update({[count] : otherPerson})
-                count++
-                // dispatch({ type: "ADD_TO_MATCHED_PEOPLE", payload: otherPerson})
-                console.log('person matched')
-        } else {
-            console.log('person not matched')
-        }
-    }
+    
 
-    const comparePerson = (user, otherPeople) => {
-        //console.log(otherPeople, 'otherPeople'
-        otherPeople.filter(otherPerson => handleComparison(user, otherPerson))
-    }
+   
     // if (pressedMatch) {
     //     //card
     // } 
@@ -84,6 +71,20 @@ function Sorting() {
     //         }}>Match</button>
     //     </div>
     // )
+
+
+const handleComparison = (user, otherPerson) => {
+    if (compareCodingPreferences(user, otherPerson) && comparePersonality(user, otherPerson)) {
+            update({[count] : otherPerson})
+            count++
+            // dispatch({ type: "ADD_TO_MATCHED_PEOPLE", payload: otherPerson})
+            console.log('person matched')
+    } else {
+        console.log('person not matched')
+    }
 }
 
-export default comparePerson;
+export const comparePerson = (user, otherPeople) => {
+    //console.log(otherPeople, 'otherPeople'
+    otherPeople.filter(otherPerson => handleComparison(user, otherPerson))
+}
