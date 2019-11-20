@@ -15,7 +15,7 @@ function ApiCall() {
                 e.preventDefault()
                 axios
                 .get(
-                    `https://maps.googleapis.com/maps/api/geocode/json?address=${currentUser}&key=AIzaSyCbyYIxp_EPw2MHXdz6QinG7NhSurjDKAk`
+                    `https://maps.googleapis.com/maps/api/geocode/json?address=${currentUser}&key=API_KEY`
                 )
                 .then(response => {
                     console.log(response, 'coordinates')
