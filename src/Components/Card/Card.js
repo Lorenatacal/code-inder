@@ -1,3 +1,4 @@
+import ReactCardFlip from 'react-card-flip';
 import React from 'react'
 import Styles from './card.module.css'
 import { Grid } from '@material-ui/core'
@@ -17,6 +18,7 @@ function Card({ yearsOfExperience = '', language}) {
     const { update } = useFirebaseDatabaseWriters(`users/${uid}/`)
     let currentCardCounter = useFirebaseDatabaseValue(`users/${uid}/CurrentCard`)
     let imageSrc = ''
+    const [flipped, setFlipped] = React.useState(false)
     
     switch (language) {
         case 'javascript':
@@ -35,18 +37,28 @@ function Card({ yearsOfExperience = '', language}) {
             imageSrc = null
             break;
     }
-
+    
     return (
-        <div className={Styles.cardContainer}>
-            <div className={Styles.avatarContainer}>
-                <img className={Styles.avatar} src={avatar}></img>
-            </div>
-            <label className={Styles.experience}>{`${experience[0]} - ${experience[3]} Years of experience!`}</label>
-            <div className={Styles.languageContainer}>
-                <img className={Styles.language} src={imageSrc}/>
-            </div>
-            <Button className={Styles.skip} onClick={() => update({['CurrentCard'] : ++currentCardCounter})}>Skip</Button>
-            <Button className={Styles.match}>Get in touch!</Button>
+        <div>
+            <ReactCardFlip isFlipped={flipped} flipDirection="vertical">
+                <div className={Styles.cardContainer}>
+                  <div className={Styles.avatarContainer}>
+                    <img className={Styles.avatar} src={avatar}></img>
+                  </div>
+                <label className={Styles.experience}>{`${experience[0]} - ${experience[3]} Years of experience!`}</label>
+                <div className={Styles.languageContainer}>
+                  <img className={Styles.language} src={imageSrc}/>
+                </div>
+                  <Button className={Styles.skip} onClick={() => update({['CurrentCard'] : ++currentCardCounter})}>Skip</Button>
+                  <Button className={Styles.match} onClick={() => setFlipped(true)}}>Get in touch!</Button>
+                <button className={Styles.cardContainer}  onClick={() => {
+                    setFlipped(false)
+                }}>
+                    <div className={Styles.avatarContainer}>
+                        <p>Back Card</p>
+                    </div>
+                </button>
+            </ReactCardFlip>
         </div>
     )
 }
