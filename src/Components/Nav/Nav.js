@@ -4,20 +4,23 @@ import Styles from './nav.module.css'
 import { Button } from '@material-ui/core'
 import { logoutUser } from '../../Redux/Actions/auth'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom' 
+import { Link } from 'react-router-dom'
+        
 
 function Nav( { currentPage } ) {
     const dispatch = useDispatch()
     return ( 
         <div className={Styles.navContainer}>
-            <Button 
-                className={currentPage == 'Home' ? Styles.navActive 
-                                                 : Styles.navItem}  
-                color='primary' 
-                size='large' 
-                variant='text'>
-                    Home
-                </Button>
+            <Link to='/' style={{textDecoration: 'none'}}>
+                <Button 
+                    className={currentPage == 'Home' ? Styles.navActive 
+                                                    : Styles.navItem}  
+                    color='primary' 
+                    size='large' 
+                    variant='text'>
+                        Home
+                    </Button>
+            </Link>
             <Link to='/profile' style={{textDecoration: 'none'}}>
                 <Button className={Styles.navItem} color='primary' size='large' variant='text'>Profile</Button>
             </Link>
