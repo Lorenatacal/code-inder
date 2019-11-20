@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Styles from './nav.module.css'
 import { Button } from '@material-ui/core'
@@ -24,5 +25,4 @@ function Nav( { currentPage } ) {
         </div>
     )
 }
-
 export default Nav

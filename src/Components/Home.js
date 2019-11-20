@@ -6,12 +6,11 @@ import { useDispatch } from 'react-redux'
 import Nav from './Nav/Nav'
 import Card from './Card/Card'
 import Profile from './Profile/Profile'
+import Questionnaire from './Questionnaire'
 
 function Home() { 
 
     const dispatch = useDispatch()
-    
-
     return (
         <>
             <Switch>
@@ -25,7 +24,7 @@ function Home() {
                     <Card></Card>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
