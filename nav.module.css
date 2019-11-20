@@ -1,8 +1,7 @@
 .navContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
     max-height: 15vh;
+    transform: translateX(18vw);
     margin-top: 1%;
 }
 

@@ -1,0 +1,24 @@
+.cardContainer { 
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    display: grid;
+    grid-template-rows: 5% 45% 10% 15% 25%;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.avatarContainer {
+    display: flex;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar { 
+    max-width: 75%;
+    max-height: 100%;
+}

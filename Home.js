@@ -4,7 +4,6 @@ import Styles from './home.module.css'
 import { logoutUser } from '../Redux/Actions/auth'
 import { useDispatch } from 'react-redux'
 import Nav from './Nav/Nav'
-import Card from './Card/Card'
 
 function Home() { 
 
@@ -16,7 +15,7 @@ function Home() {
                 <Nav currentPage='Home'/>
              </div>
              <div className={Styles.cardContainer}>
-                <Card></Card>
+                
              </div>
         </div>
     )
