@@ -1,7 +1,6 @@
 import ReactCardFlip from 'react-card-flip';
 import React from 'react'
 import Styles from './card.module.css'
-import { Grid } from '@material-ui/core'
 import avatar from '../../Assets/7_avatar-512.png'
 import javascript from '../../Assets/Languages/javascript-plain.svg'
 import c from '../../Assets/Languages/c-original.svg'
@@ -39,9 +38,8 @@ function Card({ yearsOfExperience = '', language}) {
     }
     
     return (
-        <div>
-            <ReactCardFlip isFlipped={flipped} flipDirection="vertical">
-                <div className={Styles.cardContainer}>
+        <ReactCardFlip isFlipped={flipped} flipDirection="vertical" containerStyle={{width: '100%', height: '100%'}}>
+            <div className={Styles.cardContainer}>
                   <div className={Styles.avatarContainer}>
                     <img className={Styles.avatar} src={avatar}></img>
                   </div>
@@ -50,7 +48,8 @@ function Card({ yearsOfExperience = '', language}) {
                   <img className={Styles.language} src={imageSrc}/>
                 </div>
                   <Button className={Styles.skip} onClick={() => update({['CurrentCard'] : ++currentCardCounter})}>Skip</Button>
-                  <Button className={Styles.match} onClick={() => setFlipped(true)}}>Get in touch!</Button>
+                  <Button className={Styles.match} onClick={() => setFlipped(true)}>Get in touch!</Button>
+                </div>
                 <button className={Styles.cardContainer}  onClick={() => {
                     setFlipped(false)
                 }}>
@@ -59,7 +58,6 @@ function Card({ yearsOfExperience = '', language}) {
                     </div>
                 </button>
             </ReactCardFlip>
-        </div>
     )
 }
 
