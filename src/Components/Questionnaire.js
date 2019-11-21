@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Styles from './Form.module.css';
+import { Link } from 'react-router-dom'
 import { Input } from '@material-ui/core'
 import Nav from './Nav/Nav'
 import { comparePerson } from './Sorting'
@@ -22,7 +23,7 @@ function Questionnaire() {
                                 obj[key] = allUsersList[key]
                                 return obj
                             }, {})
-    const sortedUsers = Object.values(sAllOtherUsers).map((e) => e.Profile)
+    const sortedUsers = Object.values(sAllOtherUsers).map((e) => e.Profile) || {}
     console.log(sortedUsers)
     // Form panel refs
     const personality = useRef(null)
@@ -96,9 +97,13 @@ function Questionnaire() {
         console.log (uid, 'currentUser')
         console.log (sAllOtherUsers, 'allOtherUsers')
         update({'Profile' : questionnaireInputs})
-        sortedUsers.map((user, index) => {
-            updateSUsers({[index] : user})
-        })
+        try { 
+            sortedUsers.map((user, index) => {
+                    updateSUsers({[index] : user})
+            })
+        } catch(err) { 
+            return <Link to='/'/>
+        }
         event.preventDefault()
     }
 
