@@ -171,11 +171,13 @@
     margin-right: 0.vw !important;
 }
 
+
+
 .button {
     background-color: white; 
     color: rgb(3, 20, 172); 
     border: 2px solid rgb(2, 12, 153);
-    padding: 1vw;
+    padding: 1vh;
     text-align: center;
     text-decoration: none;
     display: inline-block;
