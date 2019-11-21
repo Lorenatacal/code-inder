@@ -15,10 +15,11 @@ import axios from 'axios';
 import * as geolib from 'geolib';
 import ContactForm from '../ContactForm'
 
-function Card({ yearsOfExperience = '', language, gender, name}) {
+function Card({ yearsOfExperience = '', language, gender, name, postcode}) {
     const user = useFirebaseCurrentUser() 
     const uid = user ? user.uid : null
-    const experience = yearsOfExperience.split('')
+    const experience = yearsOfExperience.split('')        
+    const currentUser = useFirebaseDatabaseValue(`users/${uid}/Profile`)
     const { update } = useFirebaseDatabaseWriters(`users/${uid}/`)
     let currentCardCounter = useFirebaseDatabaseValue(`users/${uid}/CurrentCard`)
     let imageSrc = ''
@@ -61,7 +62,7 @@ function Card({ yearsOfExperience = '', language, gender, name}) {
 
     let l = 51.539106
     let lo = -0.037103
-    const imageSource = `https://maps.googleapis.com/maps/api/staticmap?center=${l},${lo}&zoom=14&size=400x400&key=${process.env.REACT_APP_CODEINDER_API_KEY}`
+    const imageSource = `https://maps.googleapis.com/maps/api/staticmap?center=${postcode}&zoom=14&size=400x400&key=${process.env.REACT_APP_CODEINDER_API_KEY}`
     
     return (
             
@@ -84,14 +85,14 @@ function Card({ yearsOfExperience = '', language, gender, name}) {
                    </Button>
                   <Button className={Styles.match} onClick={() => {
                        setFlipped(true)
-                    //    axios
-                    //        .get(`https://maps.googleapis.com/maps/api/staticmap?center=${l},${lo}&size=400x400&key=${process.env.REACT_APP_CODEINDER_API_KEY}`)
-                    //        .then(response => {
-                    //            console.log(response, 'response')
-                    //            setData(response.data);
-                    //            setReseter(true)
-                    //            setFlipped(true)
-                    //        })
+                       axios
+                           .get(`https://maps.googleapis.com/maps/api/staticmap?center=${postcode}&size=400x400&key=${process.env.REACT_APP_CODEINDER_API_KEY}`)
+                           .then(response => {
+                               console.log(response, 'response')
+                               setData(response.data);
+                               setReseter(true)
+                               setFlipped(true)
+                           })
                    }}>Get in touch!</Button>
             </animated.div>
             <div className={Styles.cardContainer}  >
