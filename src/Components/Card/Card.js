@@ -100,9 +100,10 @@ function Card({ yearsOfExperience = '', language, gender, name, postcode}) {
                     <img className={Styles.backMap} src={imageSource} alt="map" height="400" width="400"></img>
                     <ContactForm />
                 </div>
-                <button onClick={() => {
+                <button className={Styles.backButton} onClick={() => {
                     setFlipped(false)
                 }}>
+                    Check profile
                 </button>
             </div>
             </ReactCardFlip>
