@@ -31,6 +31,7 @@ function Dash() {
                 language={userInfo[cardCount] && userInfo[cardCount].language}
                 gender={userInfo[cardCount] && userInfo[cardCount].gender} 
                 name={userInfo[cardCount] && userInfo[cardCount].firstname  + ' ' + userInfo[cardCount].surname}
+                postcode={userInfo[cardCount] && userInfo[cardCount].postcode}
                 >    
             </Card>
         )
