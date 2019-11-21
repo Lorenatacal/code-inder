@@ -29,7 +29,9 @@ function Dash() {
             <Card
                 yearsOfExperience={userInfo[cardCount] && userInfo[cardCount].yearsOfExperience} 
                 language={userInfo[cardCount] && userInfo[cardCount].language}
-                gender={userInfo[cardCount] && userInfo[cardCount].gender}>    
+                gender={userInfo[cardCount] && userInfo[cardCount].gender} 
+                name={userInfo[cardCount] && userInfo[cardCount].firstname  + ' ' + userInfo[cardCount].surname}
+                >    
             </Card>
         )
     }
