@@ -77,7 +77,7 @@ function Card({ yearsOfExperience = '', language, gender}) {
                   <Button 
                       className={Styles.skip} onClick={() => {
                       setReseter(false)
-                      update({['CurrentCard'] : ++currentCardCounter})}>
+                      update({['CurrentCard'] : ++currentCardCounter})}}>
                       Skip
                    </Button>
                   <Button className={Styles.match} onClick={() => {

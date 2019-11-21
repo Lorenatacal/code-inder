@@ -44,8 +44,8 @@ function Profile(params) {
   
     if (profileComplete) {
         !matched && matcher() 
-        return (
-            <div className={Styles.mainContainer}>
+        return (    
+    <div className={Styles.mainContainer}>
                 <Nav className={Styles.navContainer} currentPage='Profile'/>
                 <div className={Styles.cardContainer}>
                     <h3>Your Profile:</h3>

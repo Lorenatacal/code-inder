@@ -21,7 +21,6 @@ function Dash() {
     function reset() { 
         if(loaded) {
             update({['CurrentCard'] : 0})
-            alert("You're too picky! Out of matches!")
         } else return null
     }
 

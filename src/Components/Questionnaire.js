@@ -11,9 +11,10 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 function Questionnaire() { 
     const user = useFirebaseCurrentUser()
     const uid = user ? user.uid : null
-    const { update : updateSUsers} = useFirebaseDatabaseWriters(`users/${uid}`)
+    const { update : updateSUsers} = useFirebaseDatabaseWriters(`users/${uid}/SortedUsers`)
     const { update } = useFirebaseDatabaseWriters(`users/${uid}`)
     const allUsersList = useFirebaseDatabaseValue(`users`) || {}
+    console.log(allUsersList)
     const allOtherUsersList = Object.keys(allUsersList).filter(e => e != uid)
     const sAllOtherUsers = Object.keys(allUsersList)
                             .filter(key => allOtherUsersList.includes(key))
@@ -22,7 +23,7 @@ function Questionnaire() {
                                 return obj
                             }, {})
     const sortedUsers = Object.values(sAllOtherUsers).map((e) => e.Profile)
-
+    console.log(sortedUsers)
     // Form panel refs
     const personality = useRef(null)
     const coding = useRef(null)
@@ -95,7 +96,9 @@ function Questionnaire() {
         console.log (uid, 'currentUser')
         console.log (sAllOtherUsers, 'allOtherUsers')
         update({'Profile' : questionnaireInputs})
-        updateSUsers({'SortedUsers' : sortedUsers})
+        sortedUsers.map((user, index) => {
+            updateSUsers({[index] : user})
+        })
         event.preventDefault()
     }
 
