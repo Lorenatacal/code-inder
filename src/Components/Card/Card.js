@@ -11,6 +11,7 @@ import { Button } from '@material-ui/core'
 import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
 import { useSpring, animated } from 'react-spring'
 import { useEffect } from 'react'
+import axios from 'axios';
 
 function Card({ yearsOfExperience = '', language, gender}) {
     const user = useFirebaseCurrentUser() 
@@ -22,7 +23,7 @@ function Card({ yearsOfExperience = '', language, gender}) {
     const [flipped, setFlipped] = React.useState(false)
     const [reseter, setReseter] = React.useState(false)
     const animProps = useSpring({opacity: 1, transform: 'translateX(0)', from: {opacity: 0, transform: 'translateX(50vw)'}, reset: true, immediate: reseter})
-
+    const [data, setData] = React.useState()
     
     switch (language) {
         case 'javascript':
@@ -79,7 +80,7 @@ function Card({ yearsOfExperience = '', language, gender}) {
                     setFlipped(false)
                 }}>
                     <div className={Styles.avatarContainer}>
-                        <p>Back Card</p>
+                        <img src='https://maps.googleapis.com/maps/api/staticmap?center=n179pt&zoom=14&size=400x400&key=API_KEY' alt="Smiley face" height="400" width="400"></img>
                     </div>
                 </button>
             </ReactCardFlip>
