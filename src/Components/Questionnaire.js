@@ -3,8 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 import Styles from './Form.module.css';
 import { Input } from '@material-ui/core'
 import Nav from './Nav/Nav'
-
-
+import { comparePerson } from './Sorting'
 import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
@@ -12,10 +11,8 @@ const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 function Questionnaire() { 
     const user = useFirebaseCurrentUser()
     const uid = user ? user.uid : null
-    const name = useFirebaseDatabaseValue(`users/${uid}/profile/name`)
     const { update : updateSUsers} = useFirebaseDatabaseWriters(`users/${uid}`)
     const { update } = useFirebaseDatabaseWriters(`users/${uid}`)
-    const currentUser = useFirebaseDatabaseValue(`users/${uid}/Profile`)
     const allUsersList = useFirebaseDatabaseValue(`users`) || {}
     const allOtherUsersList = Object.keys(allUsersList).filter(e => e != uid)
     const sAllOtherUsers = Object.keys(allUsersList)
@@ -92,10 +89,11 @@ function Questionnaire() {
         setQuestionnaireInputs(newState)
     }
 
+    
+
     const handleSubmit = (event) => {
         console.log (uid, 'currentUser')
         console.log (sAllOtherUsers, 'allOtherUsers')
-        // comparePerson(currentUser, sAllOtherUsers);
         update({'Profile' : questionnaireInputs})
         updateSUsers({'SortedUsers' : sortedUsers})
         event.preventDefault()
@@ -110,7 +108,7 @@ function Questionnaire() {
         
         <form onSubmit={handleSubmit} className={Styles.mainContainer}>
             <div className={Styles.navContainer}>
-                <Nav currentPage='profile'/>
+                <Nav currentPage='Profile'/>
             </div>
             <div className={Styles.personalInfoContainer}>
                     <h4 className={Styles.title1}>Personal Info</h4>
