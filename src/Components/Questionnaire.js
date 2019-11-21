@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Styles from './Form.module.css';
 import { Input } from '@material-ui/core'
@@ -6,6 +6,8 @@ import Nav from './Nav/Nav'
 
 
 import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
+
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
 
 function Questionnaire() { 
     const user = useFirebaseCurrentUser()
@@ -23,6 +25,14 @@ function Questionnaire() {
                                 return obj
                             }, {})
     const sortedUsers = Object.values(sAllOtherUsers).map((e) => e.Profile)
+
+    // Form panel refs
+    const personality = useRef(null)
+    const coding = useRef(null)
+    const executeScroll = (e, ref) => {
+        e.preventDefault()
+        scrollToRef(ref)
+    }
 
     const [questionnaireInputs, setQuestionnaireInputs] = React.useState({
         firstname: '',
@@ -144,73 +154,77 @@ function Questionnaire() {
                         }}/>
                     </label>
                         <form className={Styles.question}>
-                            <label class="radio-inline">Select your gender:
+                            <label className="radio-inline">Select your gender:
                                 <input className={Styles.space2}type="radio" name="gender" onChange={handleChangeIn('gender', "male")}/>   male
                             </label>
-                            <label class="radio-inline">
+                            <label className="radio-inline">
                                 <input className={Styles.space2} type="radio" name="gender" onChange={handleChangeIn('gender', 'female')}/>   female
                             </label>
                         </form>
+                    
+                    <button className={Styles.button} onClick={(e) => executeScroll(e, personality)}>Next</button>
+                    
                 </div>
                 
                 
-                <div className={Styles.personalityContainer}>
+                <div className={Styles.personalityContainer} ref={personality}>
                 <h4 className={Styles.title2}>Personality</h4>
-                <form className={Styles.question2}>
-                    <label class="radio-inline"> Do you love helping others?
+                <div className={Styles.question2}>
+                    <label className="radio-inline"> Do you love helping others?
                     <input className={Styles.space2} type="radio" align="right" name="helpAnswer" onChange={handleChangeIn('helpful', true)} /> yes
                     </label>
-                    <label class="radio-inline">
+                    <label className="radio-inline">
                     <input className={Styles.space2} type="radio" align="right" name="helpAnswer" onChange={handleChangeIn('helpful', false)} /> no
                     </label>
-                </form>
+                </div>
                 <br/>
-                <form className={Styles.question2}>
-                    <label class="radio-inline"> Do you prefer variety to routine?
+                <div className={Styles.question2}>
+                    <label className="radio-inline"> Do you prefer variety to routine?
                     <input className={Styles.space2} type="radio" name="varietyPreferred" onChange={handleChangeIn('varietyPreferred', true)} /> yes
                     </label>
-                    <label class="radio-inline">
+                    <label className="radio-inline">
                     <input className={Styles.space2} type="radio" name="varietyPreferred" onChange={handleChangeIn('varietyPreferred', false)} /> no
                     </label>
-                </form>
+                </div>
                 <br/>
-                <form className={Styles.question2}>
-                    <label class="radio-inline"> Are you hardworking?
+                <div className={Styles.question2}>
+                    <label className="radio-inline"> Are you hardworking?
                     <input className={Styles.space2} type="radio" name="hardworkingAnswer" onChange={handleChangeIn('hardWorking', true)} /> yes
                     </label>
                     <label>
                     <input className={Styles.space2} type="radio" name="hardworkingAnswer" onChange={handleChangeIn('hardWorking', false)} /> no
                     </label>
-                </form >
+                </div >
                 <br/>
-                <form className={Styles.question2}>
-                    <label class="radio-inline"> Would you see yourself as a leader?
+                <div className={Styles.question2}>
+                    <label className="radio-inline"> Would you see yourself as a leader?
                     <input className={Styles.space2} type="radio" name="leaderAnswer" onChange={handleChangeIn('leader', true)} /> yes
                     </label>
-                    <label class="radio-inline">
+                    <label className="radio-inline">
                     <input className={Styles.space2} type="radio" name="leaderAnswer" onChange={handleChangeIn('leader', false)} /> no
                     </label>
-                </form>
+                </div>
                 <br/>
-                <form className={Styles.question2}>
-                    <label class="radio-inline"> Do you want to work with someone who is similar to you?
+                <div className={Styles.question2}>
+                    <label className="radio-inline"> Do you want to work with someone who is similar to you?
                     <input className={Styles.space2} type="radio" name="similarAnswer" onChange={handleChangeIn('similarPair', true)} /> yes
                     </label>
                     <label>
                     <input className={Styles.space2} type="radio" name="similarAnswer" onChange={handleChangeIn('similarPair', true)} /> no
                     </label>
-                </form >
+                </div >
                 <br/>
                 <p className={Styles.question2}>A fun fact about you (will be displayed on your profile)</p>
                 <br/>
                 <textarea rows="2" cols="127" placeholder="e.g: I can lick my elbow" name="funFactInput"></textarea>
+                <button className={Styles.button} onClick={(e) => executeScroll(e, coding)}>Next</button>
                 </div>
         
-                <div className={Styles.codingContainer}>  
+                <div className={Styles.codingContainer} ref={coding}>  
                 <h4 className={Styles.title3}>Coding Preferences</h4>
                 
                 <div className={Styles.question2Container}>
-                <h1 className={Styles.question2}>Languages/frameworks preferred</h1>
+                <h1 className={Styles.question2}>Preferred languages/frameworks</h1>
                 <br/>
                 <label className={Styles.container}>
                 <input className={Styles.space} type="radio" name="language" onChange={handleChangeIn('language', 'javascript')}/>JavaScript ~ React, Redux
@@ -260,9 +274,7 @@ function Questionnaire() {
                 </label>
                 </div>
                 <br/>
-                <button className={Styles.button} type="submit" onClick={(e) => { 
-                    handleSubmit(e)
-                    }}>Submit all</button>
+                <button className={Styles.button} type="submit" onClick={handleSubmit}>Submit all</button>
                 </div>
                 <br />
              </form>
