@@ -13,8 +13,9 @@ import { useSpring, animated } from 'react-spring'
 import { useEffect } from 'react'
 import axios from 'axios';
 import * as geolib from 'geolib';
+import ContactForm from '../ContactForm'
 
-function Card({ yearsOfExperience = '', language, gender}) {
+function Card({ yearsOfExperience = '', language, gender, name}) {
     const user = useFirebaseCurrentUser() 
     const uid = user ? user.uid : null
     const experience = yearsOfExperience.split('')
@@ -34,7 +35,7 @@ function Card({ yearsOfExperience = '', language, gender}) {
     const midLatitude = Math.round(coordinates.latitude * 1000000) / 1000000
     const midLongitude = Math.round(coordinates.longitude * 1000000) / 1000000
 
-
+    console.log(name)
     console.log(midLatitude, midLongitude, 'middlePoint')
     
     switch (language) {
@@ -67,9 +68,10 @@ function Card({ yearsOfExperience = '', language, gender}) {
         <ReactCardFlip isFlipped={flipped} flipDirection="vertical" containerStyle={{width: '100%', height: '100%'}}>
                          
             <animated.div style={animProps} className={Styles.cardContainer}>
-                  <div className={Styles.avatarContainer}>
+                <div className={Styles.avatarContainer}>
                     <img className={Styles.avatar} src={gender === 'male' ? avatarM : avatarF}></img>
-                  </div>
+                </div>
+                <label className={Styles.name}>{name}</label>
                 <label className={Styles.experience}>{`${experience[0]} - ${experience[3]} Years of experience!`}</label>
                 <div className={Styles.languageContainer}>
                   <img className={Styles.language} src={imageSrc}/>
@@ -82,23 +84,26 @@ function Card({ yearsOfExperience = '', language, gender}) {
                    </Button>
                   <Button className={Styles.match} onClick={() => {
                        setFlipped(true)
-                       axios
-                           .get(`https://maps.googleapis.com/maps/api/staticmap?center=${l},${lo}&size=400x400&key=${process.env.REACT_APP_CODEINDER_API_KEY}`)
-                           .then(response => {
-                               console.log(response, 'response')
-                               setData(response.data);
-                               setReseter(true)
-                               setFlipped(true)
-                           })
+                    //    axios
+                    //        .get(`https://maps.googleapis.com/maps/api/staticmap?center=${l},${lo}&size=400x400&key=${process.env.REACT_APP_CODEINDER_API_KEY}`)
+                    //        .then(response => {
+                    //            console.log(response, 'response')
+                    //            setData(response.data);
+                    //            setReseter(true)
+                    //            setFlipped(true)
+                    //        })
                    }}>Get in touch!</Button>
             </animated.div>
-                <button className={Styles.cardContainer}  onClick={() => {
+            <div className={Styles.cardContainer}  >
+                <div className={Styles.avatarContainer}>
+                    <img className={Styles.backMap} src={imageSource} alt="map" height="400" width="400"></img>
+                    <ContactForm />
+                </div>
+                <button onClick={() => {
                     setFlipped(false)
                 }}>
-                    <div className={Styles.avatarContainer}>
-                        <img src={imageSource} alt="map" height="400" width="400"></img>
-                    </div>
                 </button>
+            </div>
             </ReactCardFlip>
     )
     
