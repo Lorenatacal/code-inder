@@ -4,18 +4,29 @@ import Styles from './profile.module.css'
 import { useFirebaseDatabaseWriters, useFirebaseCurrentUser, useFirebaseDatabaseValue } from 'fireact'
 import ReactCardFlip from 'react-card-flip'
 import Nav from '../Nav/Nav'
-
+import { comparePerson } from '../Sorting'
 
 function Profile(params) {
     const user = useFirebaseCurrentUser()
     const uid = user ? user.uid : null
     const currentUser = useFirebaseDatabaseValue(`users/${uid}/Profile`)
     const [profileComplete, setProfileComplete] = React.useState(false)
+    const { update: updateMatchedPeople } = useFirebaseDatabaseWriters(`users/${uid}/MatchedPeople`)
+    const sortedUsersList = useFirebaseDatabaseValue(`users/${uid}/SortedUsers`) || {}
+    const sortedUsers = Object.values(sortedUsersList)
+    const matched = useFirebaseDatabaseValue(`users/${uid}/MatchedPeople`)
+
+     function matcher() {
+        let matched = comparePerson(currentUser, sortedUsers)
+        console.log(matched)
+        matched.forEach((user, index) => {
+            updateMatchedPeople({[index] : user})
+        })    
+    }   
 
     React.useEffect(() => {
        console.log(currentUser, 'currentUser') 
        if (currentUser) {
-           //check if string properties are not equal to string
            if (
                 currentUser.firstname !== '' &&
                 currentUser.surname !== '' &&
@@ -30,9 +41,9 @@ function Profile(params) {
        }
     }, [currentUser])
 
-    
-
+  
     if (profileComplete) {
+        !matched && matcher() 
         return (
             <div className={Styles.mainContainer}>
                 <Nav className={Styles.navContainer} currentPage='Profile'/>
@@ -46,8 +57,6 @@ function Profile(params) {
                     <p>language: {currentUser.language}</p>
                     <p>years of experience: {currentUser.yearsOfExperience}</p>
                     <p>fun fact: {currentUser.funFact}</p>
-                    {/* <p>firstname: {currentUser.firstname}</p>
-                    <p>firstname: {currentUser.firstname}</p> */}
                 </div>
             </div>
         )

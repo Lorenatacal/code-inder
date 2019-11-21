@@ -6,6 +6,7 @@
     height: 100vh;
     background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(15,69,152,1) 29%, rgba(25,204,152,1) 100%);
+    overflow: hidden;
 }
 
 .navContainer { 
